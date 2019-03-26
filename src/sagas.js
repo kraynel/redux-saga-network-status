@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-fetch';
-import range from 'lodash/fp/range';
 import {
   delay,
   takeLatest,
@@ -135,7 +134,7 @@ export function* watchPing() {
 export function* handleBackoff({ payload: ms }) {
   const intervalLength = 1000;  // count down by one second at a time
   const intervalCount = Math.floor(ms / intervalLength);
-  for (const i of range(0, intervalCount)) {  // eslint-disable-line no-unused-vars
+  for (let i=0; i < intervalCount; i++) {  // eslint-disable-line no-unused-vars
     yield put(countDown(intervalLength));
     yield call(delay, intervalLength);
   }
